@@ -1,0 +1,17 @@
+{
+	"required": true,
+	"package": "giselle.compactmachines_rst.common.mixin",
+	"minVersion": "0.0.0",
+	"compatibilityLevel": "JAVA_17",
+	"client": [],
+	"mixins": [
+		"BlockEntityMixin",
+		"CompactMachineBlockEntityMixin",
+		"NodeBlockEntityMixin",
+		"TunnelWallEntityMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"refmap": "compactmachines_rst.mixin.refmap.json"
+}
