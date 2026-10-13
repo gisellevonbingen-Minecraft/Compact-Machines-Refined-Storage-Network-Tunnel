@@ -39,4 +39,3 @@ issueTrackerURL="${mod_issues}"
     versionRange="[0,)"
     ordering="NONE"
     side="BOTH"
-    

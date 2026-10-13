@@ -1,6 +1,6 @@
-# Minecraft-RS_CraftingMonitorInGrid
+# Compact Machines: Refined Storage Network Tunnel
 
-Add crafting monitor button in grid
+A small add-on that lets you connect RS networks, beyond the compact machine's internal and external interfaces.
 
 # License
 

@@ -1,6 +1,5 @@
 package giselle.compactmachines_rst;
 
-import java.util.Optional;
 import java.util.function.BiFunction;
 
 import org.apache.logging.log4j.LogManager;
@@ -11,7 +10,6 @@ import com.refinedmods.refinedstorage.api.network.node.INetworkNodeRegistry;
 import com.refinedmods.refinedstorage.apiimpl.API;
 import com.refinedmods.refinedstorage.apiimpl.network.node.NetworkNode;
 
-import dev.compactmods.machines.api.tunnels.TunnelDefinition;
 import dev.compactmods.machines.tunnel.TunnelItem;
 import giselle.compactmachines_rst.common.config.ModServerConfig;
 import giselle.compactmachines_rst.common.init.ModTunnels;
@@ -25,7 +23,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;

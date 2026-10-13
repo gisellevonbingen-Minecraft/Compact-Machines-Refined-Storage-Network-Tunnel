@@ -17,7 +17,7 @@ import net.minecraft.world.level.Level;
 public abstract class TunnelWallEntityMixin implements NodeProxyExtension<TunnelWallNode>
 {
 	@Shadow(remap = false)
-	abstract TunnelDefinition getTunnelType();
+	private TunnelDefinition tunnelType;
 
 	@Override
 	public Class<TunnelWallNode> compactmachines_rst$getNodeClass()
@@ -34,7 +34,7 @@ public abstract class TunnelWallEntityMixin implements NodeProxyExtension<Tunnel
 	@Override
 	public boolean compactmachines_rst$canProvideCapability()
 	{
-		return this.getTunnelType() == ModTunnels.NETWORK_TUNNEL_DEF.get();
+		return this.tunnelType == ModTunnels.NETWORK_TUNNEL_DEF.get();
 	}
 
 }

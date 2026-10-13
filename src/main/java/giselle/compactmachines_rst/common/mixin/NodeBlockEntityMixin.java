@@ -25,6 +25,8 @@ import net.minecraftforge.common.util.LazyOptional;
 public abstract class NodeBlockEntityMixin<NODE extends INetworkNode> extends BlockEntityMixin implements INetworkNodeProxy<NODE>
 {
 	private final LazyOptional<INetworkNodeProxy<NODE>> networkNodeProxy = LazyOptional.of(() -> this);
+	@SuppressWarnings("unchecked")
+	private final NodeProxyExtension<NODE> extension = (NodeProxyExtension<NODE>) (Object) this;
 
 	private NODE clientNode;
 	private NODE removedNode;
@@ -44,7 +46,7 @@ public abstract class NodeBlockEntityMixin<NODE extends INetworkNode> extends Bl
 
 		INetworkNodeManager manager = API.instance().getNetworkNodeManager((ServerLevel) this.level);
 		INetworkNode node = manager.getNode(this.worldPosition);
-		Class<NODE> nodeClass = this.compactmachines_rst$getExtension().compactmachines_rst$getNodeClass();
+		Class<NODE> nodeClass = this.extension.compactmachines_rst$getNodeClass();
 
 		if (nodeClass.isInstance(node))
 		{
@@ -57,15 +59,9 @@ public abstract class NodeBlockEntityMixin<NODE extends INetworkNode> extends Bl
 
 	}
 
-	@SuppressWarnings("unchecked")
-	private NodeProxyExtension<NODE> compactmachines_rst$getExtension()
-	{
-		return (NodeProxyExtension<NODE>) (Object) this;
-	}
-
 	private NODE compactmachines_rst$createNode()
 	{
-		return this.compactmachines_rst$getExtension().compactmachines_rst$getNodeFactory().apply(this.level, this.worldPosition);
+		return this.extension.compactmachines_rst$getNodeFactory().apply(this.level, this.worldPosition);
 	}
 
 	private NODE compactmachines_rst$createAndSetNode(INetworkNodeManager manager)
@@ -81,7 +77,7 @@ public abstract class NodeBlockEntityMixin<NODE extends INetworkNode> extends Bl
 	{
 		if (cap == NetworkNodeProxyCapability.NETWORK_NODE_PROXY_CAPABILITY)
 		{
-			if (this.compactmachines_rst$getExtension().compactmachines_rst$canProvideCapability())
+			if (this.extension.compactmachines_rst$canProvideCapability())
 			{
 				cir.setReturnValue(this.networkNodeProxy.cast());
 			}
@@ -99,7 +95,7 @@ public abstract class NodeBlockEntityMixin<NODE extends INetworkNode> extends Bl
 		{
 			INetworkNodeManager manager = API.instance().getNetworkNodeManager(level);
 			INetworkNode node = manager.getNode(this.worldPosition);
-			Class<NODE> nodeClass = this.compactmachines_rst$getExtension().compactmachines_rst$getNodeClass();
+			Class<NODE> nodeClass = this.extension.compactmachines_rst$getNodeClass();
 			INetwork network = null;
 
 			if (nodeClass.isInstance(node))
@@ -125,9 +121,9 @@ public abstract class NodeBlockEntityMixin<NODE extends INetworkNode> extends Bl
 	}
 
 	@Override
-	protected void compactmachines_rst$onclearRemoved()
+	protected void compactmachines_rst$onClearRemoved()
 	{
-		super.compactmachines_rst$onclearRemoved();
+		super.compactmachines_rst$onClearRemoved();
 
 		if (this.level instanceof ServerLevel level)
 		{

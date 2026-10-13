@@ -33,7 +33,7 @@ public abstract class BlockEntityMixin
 	@Inject(method = "clearRemoved", remap = true, at = @At(value = "head"), cancellable = false)
 	private void clearRemoved(CallbackInfo ci)
 	{
-		this.compactmachines_rst$onclearRemoved();
+		this.compactmachines_rst$onClearRemoved();
 	}
 
 	@Inject(method = "onChunkUnloaded", remap = false, at = @At(value = "head"), cancellable = false)
@@ -47,7 +47,7 @@ public abstract class BlockEntityMixin
 
 	}
 
-	protected void compactmachines_rst$onclearRemoved()
+	protected void compactmachines_rst$onClearRemoved()
 	{
 
 	}
