@@ -15,38 +15,36 @@ import com.refinedmods.refinedstorage.capability.NetworkNodeProxyCapability;
 
 import dev.compactmods.machines.machine.CompactMachineBlockEntity;
 import dev.compactmods.machines.tunnel.TunnelWallEntity;
-import giselle.compactmachines_rst.common.NodeProxyExtension;
+import giselle.compactmachines_rst.common.INetworkNodeProxyExtension;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 
 @Mixin(value = {CompactMachineBlockEntity.class, TunnelWallEntity.class}, remap = false)
-public abstract class NodeBlockEntityMixin<NODE extends INetworkNode> extends BlockEntityMixin implements INetworkNodeProxy<NODE>
+public abstract class NodeBlockEntityMixin<NODE extends INetworkNode> extends BlockEntityMixin implements INetworkNodeProxyExtension<NODE>
 {
-	private final LazyOptional<INetworkNodeProxy<NODE>> networkNodeProxy = LazyOptional.of(() -> this);
-	@SuppressWarnings("unchecked")
-	private final NodeProxyExtension<NODE> extension = (NodeProxyExtension<NODE>) (Object) this;
+	private final LazyOptional<INetworkNodeProxy<NODE>> compactmachines_rst$networkNodeProxy = LazyOptional.of(() -> this);
 
-	private NODE clientNode;
-	private NODE removedNode;
+	private NODE compactmachines_rst$clientNode;
+	private NODE compactmachines_rst$removedNode;
 
 	@Override
 	public NODE getNode()
 	{
 		if (this.level.isClientSide)
 		{
-			if (this.clientNode == null)
+			if (this.compactmachines_rst$clientNode == null)
 			{
-				this.clientNode = this.compactmachines_rst$createNode();
+				this.compactmachines_rst$clientNode = this.compactmachines_rst$createNode();
 			}
 
-			return this.clientNode;
+			return this.compactmachines_rst$clientNode;
 		}
 
 		INetworkNodeManager manager = API.instance().getNetworkNodeManager((ServerLevel) this.level);
 		INetworkNode node = manager.getNode(this.worldPosition);
-		Class<NODE> nodeClass = this.extension.compactmachines_rst$getNodeClass();
+		Class<NODE> nodeClass = this.compactmachines_rst$getNodeClass();
 
 		if (nodeClass.isInstance(node))
 		{
@@ -61,7 +59,7 @@ public abstract class NodeBlockEntityMixin<NODE extends INetworkNode> extends Bl
 
 	private NODE compactmachines_rst$createNode()
 	{
-		return this.extension.compactmachines_rst$getNodeFactory().apply(this.level, this.worldPosition);
+		return this.compactmachines_rst$getNodeFactory().apply(this.level, this.worldPosition);
 	}
 
 	private NODE compactmachines_rst$createAndSetNode(INetworkNodeManager manager)
@@ -77,9 +75,9 @@ public abstract class NodeBlockEntityMixin<NODE extends INetworkNode> extends Bl
 	{
 		if (cap == NetworkNodeProxyCapability.NETWORK_NODE_PROXY_CAPABILITY)
 		{
-			if (this.extension.compactmachines_rst$canProvideCapability())
+			if (this.compactmachines_rst$canProvideCapability())
 			{
-				cir.setReturnValue(this.networkNodeProxy.cast());
+				cir.setReturnValue(this.compactmachines_rst$networkNodeProxy.cast());
 			}
 
 		}
@@ -95,17 +93,17 @@ public abstract class NodeBlockEntityMixin<NODE extends INetworkNode> extends Bl
 		{
 			INetworkNodeManager manager = API.instance().getNetworkNodeManager(level);
 			INetworkNode node = manager.getNode(this.worldPosition);
-			Class<NODE> nodeClass = this.extension.compactmachines_rst$getNodeClass();
+			Class<NODE> nodeClass = this.compactmachines_rst$getNodeClass();
 			INetwork network = null;
 
 			if (nodeClass.isInstance(node))
 			{
 				network = node.getNetwork();
-				this.removedNode = nodeClass.cast(node);
+				this.compactmachines_rst$removedNode = nodeClass.cast(node);
 			}
 			else
 			{
-				this.removedNode = null;
+				this.compactmachines_rst$removedNode = null;
 			}
 
 			manager.removeNode(this.worldPosition);

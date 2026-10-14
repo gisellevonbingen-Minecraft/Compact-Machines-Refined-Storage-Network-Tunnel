@@ -17,7 +17,7 @@ import dev.compactmods.machines.api.location.IDimensionalBlockPosition;
 import dev.compactmods.machines.api.tunnels.TunnelDefinition;
 import dev.compactmods.machines.location.LevelBlockPosition;
 import dev.compactmods.machines.tunnel.TunnelWallEntity;
-import giselle.compactmachines_rst.common.NodeProxyExtension;
+import giselle.compactmachines_rst.common.INetworkNodeProxyExtension;
 import giselle.compactmachines_rst.common.init.ModTunnels;
 import giselle.compactmachines_rst.common.network.node.CompactMachineNode;
 import giselle.compactmachines_rst.common.network.node.TunnelWallNode;
@@ -30,7 +30,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 @Mixin(value = TunnelWallEntity.class, remap = false)
-public abstract class TunnelWallEntityMixin extends BlockEntity implements NodeProxyExtension<TunnelWallNode>
+public abstract class TunnelWallEntityMixin extends BlockEntity implements INetworkNodeProxyExtension<TunnelWallNode>
 {
 	@Shadow(remap = false)
 	private LevelBlockPosition connectedMachine;

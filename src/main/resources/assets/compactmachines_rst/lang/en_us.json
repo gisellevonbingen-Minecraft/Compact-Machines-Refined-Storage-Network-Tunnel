@@ -1,5 +1,5 @@
 {
 	"item.compactmachines_rst.tunnels.network": "Refined Storage Network Tunnel",
-	"item.compactmachines_rst.tunnels.network.tooltip": "This tunnel does not check the direction",
+	"text.compactmachines_rst.tunnels.tooltip": "This tunnel does not check the direction",
 	"_eol": "_eol"
 }

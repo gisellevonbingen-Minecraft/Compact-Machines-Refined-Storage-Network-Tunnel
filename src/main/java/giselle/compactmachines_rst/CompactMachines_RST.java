@@ -73,7 +73,7 @@ public class CompactMachines_RST
 			{
 				if (definition == ModTunnels.NETWORK_TUNNEL_DEF.get())
 				{
-					e.getToolTip().add(1, Component.translatable("item.compactmachines_rst.tunnels.network.tooltip").withStyle(ChatFormatting.GRAY));
+					e.getToolTip().add(1, Component.translatable("text.compactmachines_rst.tunnels.tooltip").withStyle(ChatFormatting.GRAY));
 				}
 
 			});
