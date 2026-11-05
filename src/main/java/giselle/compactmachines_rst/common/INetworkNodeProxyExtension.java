@@ -15,4 +15,6 @@ public interface INetworkNodeProxyExtension<NODE extends INetworkNode> extends I
 	BiFunction<Level, BlockPos, NODE> compactmachines_rst$getNodeFactory();
 
 	boolean compactmachines_rst$canProvideCapability();
+
+	void compactmachines_rst$removeNode();
 }

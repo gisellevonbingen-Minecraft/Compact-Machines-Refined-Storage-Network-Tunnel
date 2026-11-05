@@ -89,6 +89,12 @@ public abstract class NodeBlockEntityMixin<NODE extends INetworkNode> extends Bl
 	{
 		super.compactmachines_rst$onRemovedNotDueToChunkUnload();
 
+		this.compactmachines_rst$removeNode();
+	}
+
+	@Override
+	public void compactmachines_rst$removeNode()
+	{
 		if (this.level instanceof ServerLevel level)
 		{
 			INetworkNodeManager manager = API.instance().getNetworkNodeManager(level);
